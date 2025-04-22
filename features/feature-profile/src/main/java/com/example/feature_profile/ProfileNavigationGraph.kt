@@ -5,12 +5,13 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import com.example.core_navigation.Navigable
-import com.example.core_navigation.NavigableGraphEntryPoint
 import com.example.core_navigation.NavigableMainGraphEntryPoint
 import com.example.core_navigation.OnNavigateTo
 import kotlinx.serialization.Serializable
 
-sealed class ProfileGraphRoute : Navigable {
+@Serializable data object ProfileFlowEntryPoint : Navigable
+
+internal sealed class ProfileGraphRoute : Navigable {
     @Serializable
     data object Screen1 : ProfileGraphRoute()
 
@@ -21,7 +22,7 @@ sealed class ProfileGraphRoute : Navigable {
 fun NavGraphBuilder.addProfileGraph(
     navController: NavController,
     onNavigateToFlow: OnNavigateTo
-) = navigation<NavigableGraphEntryPoint.ProfileFlowEntryPoint>(
+) = navigation<ProfileFlowEntryPoint>(
     startDestination = ProfileGraphRoute.Screen1,
 ) {
     composable<ProfileGraphRoute.Screen1> {

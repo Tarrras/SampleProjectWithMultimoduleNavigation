@@ -5,11 +5,12 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import com.example.core_navigation.Navigable
-import com.example.core_navigation.NavigableGraphEntryPoint
 import com.example.core_navigation.OnNavigateTo
 import kotlinx.serialization.Serializable
 
-sealed class WalletGraphRoute : Navigable {
+@Serializable data object WalletFlowEntryPoint : Navigable
+
+internal sealed class WalletGraphRoute : Navigable {
     @Serializable
     data object Screen1 : WalletGraphRoute()
     @Serializable
@@ -20,7 +21,7 @@ fun NavGraphBuilder.addWalletGraph(
     navController: NavController,
     onNavigateToFlow: OnNavigateTo
 ) =
-    navigation<NavigableGraphEntryPoint.WalletFlowEntryPoint>(
+    navigation<WalletFlowEntryPoint>(
         startDestination = WalletGraphRoute.Screen1,
     ) {
         composable<WalletGraphRoute.Screen1> {

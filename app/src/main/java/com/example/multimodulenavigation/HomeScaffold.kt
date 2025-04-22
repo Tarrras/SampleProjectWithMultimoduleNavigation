@@ -21,10 +21,12 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.example.core_navigation.NavigableGraphEntryPoint
+import com.example.core_navigation.Navigable
 import com.example.core_navigation.OnNavigateTo
 import com.example.core_navigation.isStartDestination
+import com.example.feature_profile.ProfileFlowEntryPoint
 import com.example.feature_profile.addProfileGraph
+import com.example.feature_wallet.WalletFlowEntryPoint
 import com.example.feature_wallet.addWalletGraph
 
 @Composable
@@ -78,7 +80,7 @@ internal fun HomeScaffold(
     ) { contentPadding ->
         NavHost(
             navController = navController,
-            startDestination = NavigableGraphEntryPoint.WalletFlowEntryPoint,
+            startDestination = WalletFlowEntryPoint,
             modifier = Modifier.systemBarsPadding(),
         ) {
             addWalletGraph(onNavigateToFlow = onNavigate, navController = navController)
@@ -87,15 +89,15 @@ internal fun HomeScaffold(
     }
 }
 
-private val items =
-    listOf(
-        NavigableGraphEntryPoint.WalletFlowEntryPoint,
-        NavigableGraphEntryPoint.ProfileFlowEntryPoint,
-    )
+private val items = listOf(
+    WalletFlowEntryPoint,
+    ProfileFlowEntryPoint,
+)
 
-private val NavigableGraphEntryPoint.icon
+private val Navigable.icon
     get() =
         when (this) {
-            NavigableGraphEntryPoint.WalletFlowEntryPoint -> Icons.Default.Home
-            NavigableGraphEntryPoint.ProfileFlowEntryPoint -> Icons.Default.Menu
+            WalletFlowEntryPoint -> Icons.Default.Home
+            //ProfileFlowEntryPoint
+            else -> Icons.Default.Menu
         }
