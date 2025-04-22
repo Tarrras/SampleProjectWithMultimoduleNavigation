@@ -9,7 +9,8 @@ import com.example.core_navigation.NavigableMainGraphEntryPoint
 import com.example.core_navigation.OnNavigateTo
 import kotlinx.serialization.Serializable
 
-@Serializable data object ProfileFlowEntryPoint : Navigable
+@Serializable
+data object ProfileFlowEntryPoint : Navigable
 
 internal sealed class ProfileGraphRoute : Navigable {
     @Serializable
@@ -32,7 +33,11 @@ fun NavGraphBuilder.addProfileGraph(
     }
     composable<ProfileGraphRoute.Screen2> {
         FeatureProfileScreen2(
-            onNext = { onNavigateToFlow(NavigableMainGraphEntryPoint.AuthFlowMainEntryPoint) {} },
+            onNext = {
+                onNavigateToFlow(NavigableMainGraphEntryPoint.AuthFlowMainEntryPoint) {
+                    popUpTo(NavigableMainGraphEntryPoint.AuthFlowMainEntryPoint)
+                }
+            },
             onBack = { navController.popBackStack() },
         )
     }
