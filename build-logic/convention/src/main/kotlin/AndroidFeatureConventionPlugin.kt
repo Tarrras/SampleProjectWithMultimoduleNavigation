@@ -25,6 +25,7 @@ class AndroidFeatureConventionPlugin : Plugin<Project> {
             dependencies {
                 implementation(libsDependency("androidx.navigation.compose"))
                 implementation(project(":core:core-navigation"))
+                implementation(project(":core:core-design"))
             }
         }
     }
